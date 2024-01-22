@@ -41,7 +41,9 @@
 		
 		<interceptor>
 			<mapping path="/qna/update"/>
+			<mapping path="/qna/delete"/>
 			<mapping path="/notice/update"/>
+			<mapping path="/notice/delete"/>
 			<beans:ref bean="writerCheckInterceptor"/>
 		</interceptor>
 		

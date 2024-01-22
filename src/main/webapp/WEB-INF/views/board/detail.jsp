@@ -48,8 +48,11 @@
                                 <c:if test="${bbs eq '1'}">
                                     <a class="btn btn-primary" href="reply?boardNum=${boardDTO.boardNum}">답글</a>
                                 </c:if>
+
+                                <c:if test="${boardDTO.boardWriter eq member.userName}">
                                 <a id="update" class="btn btn-info" href="#">Update</a>
                                 <a id="delete" class="btn btn-primary" href="#">Delete</a>
+                                </c:if>
                                 <form id="frm" action="./update" method="get">
                                     <input type="hidden" name="boardNum" value="${boardDTO.boardNum}">
                                 </form>
