@@ -74,6 +74,9 @@ public class MemberController {
 		
 	}
 	
+	@GetMapping("agreement")
+	public void setAgreement()throws Exception{}
+	
 	
 	@GetMapping("join")
 	public void setJoin()throws Exception{
