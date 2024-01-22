@@ -126,10 +126,13 @@
 								</ul>
 							</nav>
 						</div>
-
+						
+						<c:if test="${not empty member}">
 						<div>
 							<a href="./add" class="btn btn-danger">글쓰기</a>
 						</div>
+						</c:if>
+					
 					</div>
 
 				</div>

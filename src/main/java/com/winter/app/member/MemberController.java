@@ -21,19 +21,31 @@ public class MemberController {
 	public String setUpdate(MemberDTO memberDTO, HttpSession session)throws Exception{
 		//DB에 업데이트 후 myPage로 이동..
 		MemberDTO m = (MemberDTO)session.getAttribute("member");
+		
 		memberDTO.setUserName(m.getUserName());
-		memberDTO.setAvatarDTO(m.getAvatarDTO());
-		session.setAttribute("member", memberDTO);
+		
 		int result = memberService.setUpdate(memberDTO);
+		
+		
 		
 		return "redirect:./mypage";
 	}
 	
 	@GetMapping("update")
-	public void setUpdate()throws Exception{}
+	public void setUpdate(HttpSession session, Model model)throws Exception{
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		memberDTO = memberService.getDetail(memberDTO);
+		model.addAttribute("member", memberDTO);
+	}
 	
 	@GetMapping("mypage")
-	public void getMypage()throws Exception{}
+	public void getMypage(HttpSession session, Model model)throws Exception{
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		memberDTO=memberService.getDetail(memberDTO);
+		
+		model.addAttribute("member", memberDTO);
+		
+	}
 	
 	@GetMapping("logout")
 	public String getLogout(HttpSession session)throws Exception{

@@ -24,14 +24,10 @@
                             <label for="userName" class="form-label">ID</label>
                             <input type="text" value="${member.userName}" disabled class="form-control" id="userName" name="userName">
                         </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">PASSWORD</label>
-                            <input type="password" value="${member.password}" class="form-control" id="password" name="password">
-                        </div>
 
                         <div class="mb-3">
                             <label for="name" class="form-label">NAME</label>
-                            <input type="text" value="${member.name}" class="form-control" id="name" name="name">
+                            <input type="text" value="${requestScope.member.name}" class="form-control" id="name" name="name">
                         </div>
 
                         <div class="mb-3">
