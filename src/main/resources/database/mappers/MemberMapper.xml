@@ -4,6 +4,30 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <!-- mapper namespace는 비우면 에러 -->
   <mapper namespace="com.winter.app.member.MemberDAO">
+  	<update id="setUpdate" parameterType="MemberDTO">
+  		UPDATE MEMBER
+  			<set>
+  				<if test="name != null and name !=''">
+  					NAME=#{name},
+  				</if>
+  				
+  				<if test="email != null and email !=''">
+  					EMAIL=#{email},
+  				</if>
+  				
+  				<if test="phone != null and phone !=''">
+  					PHONE=#{phone},
+  				</if>
+  				<if test="address != null and address !=''">
+  					ADDRESS=#{address},
+  				</if>
+  				
+  			</set>
+  			WHERE USERNAME=#{userName}
+  		
+  	</update>
+  	
+  
   	<select id="getDetail" parameterType="MemberDTO" resultMap="getDetailResult">
   		SELECT * 
   		FROM MEMBER M

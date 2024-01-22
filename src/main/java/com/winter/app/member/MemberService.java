@@ -18,6 +18,10 @@ public class MemberService {
 	@Autowired
 	private ServletContext servletContext;
 	
+	public int setUpdate(MemberDTO memberDTO)throws Exception{
+		return memberDAO.setUpdate(memberDTO);
+	}
+	
 	public MemberDTO getLogin(MemberDTO memberDTO)throws Exception{
 		MemberDTO m = memberDAO.getDetail(memberDTO);
 		

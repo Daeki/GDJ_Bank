@@ -17,6 +17,21 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	@PostMapping("update")
+	public String setUpdate(MemberDTO memberDTO, HttpSession session)throws Exception{
+		//DB에 업데이트 후 myPage로 이동..
+		MemberDTO m = (MemberDTO)session.getAttribute("member");
+		memberDTO.setUserName(m.getUserName());
+		memberDTO.setAvatarDTO(m.getAvatarDTO());
+		session.setAttribute("member", memberDTO);
+		int result = memberService.setUpdate(memberDTO);
+		
+		return "redirect:./mypage";
+	}
+	
+	@GetMapping("update")
+	public void setUpdate()throws Exception{}
+	
 	@GetMapping("mypage")
 	public void getMypage()throws Exception{}
 	
