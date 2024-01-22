@@ -32,9 +32,19 @@
 		
 		<interceptor>
 			<mapping path="/qna/*"/>
+			<mapping path="/member/mypage"/>
+			<mapping path="/member/update"/>
+			<mapping path="/member/delete"/>
 			<exclude-mapping path="/qna/list"/>
 			<beans:ref bean="authenticationInterCeptor"/>
 		</interceptor>
+		
+		<interceptor>
+			<mapping path="/qna/update"/>
+			<mapping path="/notice/update"/>
+			<beans:ref bean="writerCheckInterceptor"/>
+		</interceptor>
+		
 	</interceptors>
 	
 	<context:component-scan base-package="com.winter.app" />
