@@ -27,7 +27,13 @@
                         <div class="mb-3">
                             <label for="password" class="form-label">PASSWORD</label>
                             <input type="password" class="form-control" id="password" name="password">
+                            <div id="passwordResult"></div>
                         </div>
+                        <div class="mb-3">
+                            <label for="passwordCheck" class="form-label">PASSWORD</label>
+                            <input type="password" class="form-control" id="passwordCheck" >
+                            <div id="passwordCheckResult"></div>
+                        </div>                        
 
                         <div class="mb-3">
                             <label for="name" class="form-label">NAME</label>
@@ -53,7 +59,7 @@
                             <input type="file" class="form-control" id="avatar" name="avatar">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Join</button>
+                        <button type="button" class="btn btn-primary">Join</button>
                       </form>
                 </div>
             </div>                    
@@ -61,7 +67,8 @@
         <!-- Footer-->
         <!-- 사용전 경로를 꼭 수정 하세요 -->
         <c:import url="../temps/footer.jsp"></c:import>
-
+        
+        <script src="../resources/js/member/joinCheck.js"></script>
     </body>
 </html>
     
