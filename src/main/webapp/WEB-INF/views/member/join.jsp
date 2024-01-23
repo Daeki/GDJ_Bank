@@ -59,7 +59,7 @@
                             <input type="file" class="form-control" id="avatar" name="avatar">
                         </div>
 
-                        <button type="button" class="btn btn-primary">Join</button>
+                        <button type="button" id="btn" class="btn btn-primary">Join</button>
                       </form>
                 </div>
             </div>                    
