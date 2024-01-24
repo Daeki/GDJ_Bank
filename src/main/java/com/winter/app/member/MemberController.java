@@ -17,6 +17,20 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	
+	@GetMapping("idCheck")
+	public String getIdCheck(MemberDTO memberDTO, Model model)throws Exception{
+		memberDTO = memberService.getDetail(memberDTO);
+		
+		int result=0;
+		if(memberDTO == null) {
+			result=1;
+		}
+		model.addAttribute("result", result);
+		
+		return "commons/ajaxResult";
+	}
+	
 	@PostMapping("update")
 	public String setUpdate(MemberDTO memberDTO, HttpSession session)throws Exception{
 		//DB에 업데이트 후 myPage로 이동..

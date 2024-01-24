@@ -1,36 +1,44 @@
-//js
-const b1 = document.getElementById("b1");
-const b2 = document.querySelector("#b2");
+let btn = document.getElementById("btn");
+let btn2 = document.getElementById("btn2");
 
-b1.addEventListener("click", ()=>{
+btn2.addEventListener("click", function(){
+    let t = document.getElementById("title").value;
+    let c = document.getElementById("contents").value;
+
+    fetch("/notice/add", {
+        method:"POST",
+        headers:{
+            "Content-type":"application/x-www-form-urlencoded"
+        },
+        body:"boardTitle="+t+"&boardContents="+c
+    })
+    .then(response => response.text())
+    .then(response => console.log(response));
+    
+    ;
 
 })
-let v = b1.innerHTML;
-b1.innerHTML='test';
-
-b1.속성명
-b1.getAttribute("속성명");
-b1.setAttribute("속성명", "값");
 
 
-//jquery
-//$("선택자").action()
-$("#b1").click(()=>{
 
-});
+btn.addEventListener("click", function(){
+    console.log("Ajax 시작");
 
-$("#b2").on("click", ()=>{
+    fetch("/notice/list", {
+        method:"GET"
+    })
+    .then(response=>{return response.text()})
+    .then((res)=>{
+        document.getElementById("result").innerHTML=res;
 
-});
+    })
+    //Arrow Function
+    //function(){}  -> ()=>console.log
+    
+    ;
 
-$("#b1").html();//text()
-$("#b1").html("test");
+    console.log("끝");
 
-$("#b1").attr("속성명");
-$("#b1").attr("속성명", "값");
+})
 
-$("#b1").prop("속성명");
-$("#b1").prop("속성명", "값");
 
-$("#b1").val();
-$("#b1").val("값");

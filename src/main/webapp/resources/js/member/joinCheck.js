@@ -65,6 +65,14 @@ $('#btn').click(function(){
 
 })
 
+$("#userName").blur(function(){
+    fetch("./idCheck?userName="+$("#userName").val(), {
+        method:"GET",
+    })
+    .then(response=>response.text())
+    .then(response=>console.log(response))
+});
+
 $('#password').blur(function(){
     if($('#password').val().length>7){
         $('#passwordResult').html('OK');
