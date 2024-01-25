@@ -49,7 +49,14 @@ a {
 				</div>
 			</div>
 		</div>
+
+
+
 		<div class="container">
+			<div>
+				<button id="del">삭제</button>
+			</div>
+
 			<table class="table table-hover">
 				<thead>
 					<tr class="table-dark">
@@ -71,7 +78,7 @@ a {
 						<tr>
 							<td>
 								<div class="form-check">
-									<input class="form-check-input checks" type="checkbox" value="" >
+									<input class="form-check-input checks" type="checkbox" value="${dto.productNum}" >
 								</div>
 							</td>
 							<td>${dto.productNum}</td>
@@ -122,5 +129,6 @@ a {
 	<!-- 사용전 경로를 꼭 수정하세요  -->
 	<!-- Footer  -->
 	<c:import url="../temps/footer.jsp"></c:import>
+	<script src="/resources/js/wish/wishlist.js" type="text/javascript"></script>
 </body>
 </html>

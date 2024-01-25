@@ -1,6 +1,7 @@
 package com.winter.app.wishlist;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,10 @@ public class WishListDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	private final String nameSpace="com.winter.app.wishlist.WishListDAO.";
+	
+	public int setDelete(Map<String, Object> map)throws Exception{
+		return sqlSession.delete(nameSpace+"setDelete", map);
+	}
 	
 	public List<ProductDTO> getList(MemberDTO memberDTO)throws Exception{
 		return sqlSession.selectList(nameSpace+"getList", memberDTO);

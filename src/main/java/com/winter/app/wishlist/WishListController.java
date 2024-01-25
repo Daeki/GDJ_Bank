@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.winter.app.account.AccountDTO;
@@ -20,6 +21,17 @@ public class WishListController {
 
 	@Autowired
 	private WishListService wsListService;
+	
+	@PostMapping("delete")
+	public String setDelete(Long [] productNum, HttpSession session, Model model)throws Exception{
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		int result = wsListService.setDelete(productNum, memberDTO);
+		List<ProductDTO> ar = wsListService.getList(memberDTO);
+		
+		model.addAttribute("result", result);
+		
+		return "commons/ajaxResult";
+	}
 	
 	@GetMapping("list")
 	public void getList(HttpSession session, Model model)throws Exception{
