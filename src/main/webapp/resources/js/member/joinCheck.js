@@ -66,11 +66,32 @@ $('#btn').click(function(){
 })
 
 $("#userName").blur(function(){
-    fetch("./idCheck?userName="+$("#userName").val(), {
+    // fetch("./idCheck?userName="+$("#userName").val(), {
+    //     method:"GET",
+    // })
+    // .then(response=>response.text())
+    // .then(response=>console.log(response.trim()))
+
+    // $.get("idCheck?userName="+$("#userName").val(), function(response){
+    //     console.log(response);
+    // })
+    let userName =$("#userName").val();
+    $.ajax({
+        url:"./idCheck",
         method:"GET",
-    })
-    .then(response=>response.text())
-    .then(response=>console.log(response))
+        data:{
+            userName:userName
+        },
+        success:function(r){
+            console.log(r)
+        },
+        error:function(){
+            alert('ID에 검증 실패')
+        }
+    });
+
+
+
 });
 
 $('#password').blur(function(){

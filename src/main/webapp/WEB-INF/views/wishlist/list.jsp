@@ -53,19 +53,31 @@ a {
 			<table class="table table-hover">
 				<thead>
 					<tr class="table-dark">
+						<th>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" value="" id="checkAll">
+								<label class="form-check-label" for="checkAll">
+									전체선택
+								</label>
+						  	</div>
+						</th>
 						<th>No</th>
 						<th>Product Name</th>
 						<th>Rate</th>
-						<th>Product Rating</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${list}" var="dto">
 						<tr>
+							<td>
+								<div class="form-check">
+									<input class="form-check-input checks" type="checkbox" value="" >
+								</div>
+							</td>
 							<td>${dto.productNum}</td>
-							<td><a href="./detail?productNum=${dto.productNum}">${dto.productName}</a></td>
+							<td><a href="../product/detail?productNum=${dto.productNum}">${dto.productName}</a></td>
 							<td>${dto.productRate}</td>
-							<td>${dto.productJumsu}</td>
+							
 						</tr>
 					</c:forEach>
 					<%-- <c:if test="${list.size() != 10}">

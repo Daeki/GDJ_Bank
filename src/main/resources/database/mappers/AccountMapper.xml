@@ -4,23 +4,38 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <!-- mapper namespace는 비우면 에러 -->
   <mapper namespace="com.winter.app.account.AccountDAO">
-
   
-<!--   	<select id="getList" resultMap="getListResult" parameterType="Map">
-  		
-  		SELECT * FROM
-  		(
-  			SELECT ROWNUM R, PA.* FROM
-	  		(
-	  			SELECT * 
-	  			FROM PRODUCT P
-	  				 LEFT JOIN 
-	  				 ACCOUNT A
-	  			 	USING (PRODUCTNUM) 
-	  			WHERE USERNAME=#{memberDTO.userName}) PA
-  		)
-  		WHERE R BETWEEM #{pager.startRow} AND #{pager.lastRow}
+  	<!-- add -->
+  	<insert id="setAdd" parameterType="AccountDTO">
+	  	INSERT INTO ACCOUNT (ACCOUNTNUM, USERNAME, PRODUCTNUM, ACCOUNTPW)
+	  	VALUES(#{accountNum}, #{userName}, #{productNum}, #{accountPw})
+  	</insert>
   	
-  	</select> -->
-  
+  	<!-- List -->
+  	<select id="getTotalCount" resultType="Long" parameterType="Pager">
+  		SELECT COUNT(ACCOUNTNUM) FROM ACCOUNT WHERE USERNAME=#{search}
+  	</select>
+  	
+  	<select id="getList" resultMap="joinResult" parameterType="Pager">
+  		SELECT * FROM
+  			(SELECT ROWNUM R, N.* FROM
+  				(SELECT * FROM ACCOUNT
+				LEFT JOIN PRODUCT
+				USING (PRODUCTNUM)
+				WHERE USERNAME = #{search} ORDER BY PRODUCTNUM DESC)	
+  			N)
+  		WHERE R BETWEEN #{startRow} AND #{lastRow}  		
+  		
+  	</select>
+  	
+  	<resultMap type="ProductDTO" id="joinResult">
+  		<result column="PRODUCTNAME" property="productName"/>
+  		<result column="PRODUCTRATE" property="productRate"/>
+  		<collection property="accountDTOs" javaType="List" ofType="accountDTO">
+  			<id column="ACCOUNTNUM" property="accountNum"/>
+  			<result column="ACCOUNTBALANCE" property="accountBalance"/>
+  			<result column="ACCOUNTDATE" property="accountDate"/>
+  		</collection>
+  	</resultMap>
+  	
   </mapper>

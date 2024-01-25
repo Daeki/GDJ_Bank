@@ -28,7 +28,7 @@
                     <div class="bg-light rounded-4 py-5 px-4 px-md-5">
                         <div class="text-center mb-5">
                             <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
-                            <h1 class="fw-bolder">상품 등록 페이지</h1>
+                            <h1 class="fw-bolder">상품 수정 페이지</h1>
                             <p class="lead fw-normal text-muted mb-0">Let's work together!</p>
                         </div>
                         <div class="row gx-5 justify-content-center">
@@ -40,10 +40,10 @@
                                 <!-- To make this form functional, sign up at-->
                                 <!-- https://startbootstrap.com/solution/contact-forms-->
                                 <!-- to get an API token!-->
-                                <form id="contactForm" action="add" method="post" enctype="multipart/form-data">
+                                <form id="contactForm" action="update" method="post">
                                     <!-- 상품명 input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" name="productName" id="name" type="text" placeholder="상품명을 입력하세요" data-sb-validations="required" />
+                                        <input class="form-control" name="productName" id="name" type="text" placeholder="상품명을 입력하세요" data-sb-validations="required" value="${dto.productName}"/>
                                         <label for="name">상품명</label>
                                         <div class="invalid-feedback" data-sb-feedback="name:required">상품명은 필수항목 입니다</div>
                                     </div>
@@ -55,18 +55,9 @@
                                     </div>
                                     <!-- 이자율 input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" name="productRate" id="rate" type="text" placeholder="이자율을 입력하세요" data-sb-validations="required" />
+                                        <input class="form-control" name="productRate" id="rate" type="text" placeholder="이자율을 입력하세요" data-sb-validations="required" value="${dto.productRate}"/>
                                         <label for="name">이자율</label>
                                         <div class="invalid-feedback" data-sb-feedback="rate:required">이자율은 필수항목 입니다</div>
-                                    </div>
-                                    <!-- 첨부파일 input-->
-                                    <div class="mb-3">
-                                        <label for="name">파일 첨부</label>
-                                        <input class="form-control" type="file" name="attach"/>
-                                        <input class="form-control" type="file" name="attach"/>
-                                        <input class="form-control" type="file" name="attach"/>
-                                        <input class="form-control" type="file" name="attach"/>
-                                        <input class="form-control" type="file" name="attach"/>
                                     </div>
                                     <!-- an error submitting the form-->
                                     <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
@@ -84,15 +75,17 @@
 	<!-- Footer  -->
 	<c:import url="../temps/footer.jsp"></c:import>
 	<script>
-		$(document).ready(function() {
-			$('#message').summernote({
-				  height: 300,                 // 에디터 높이
-				  minHeight: null,             // 최소 높이
-				  maxHeight: null,             // 최대 높이
-				  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-				  lang: "ko-KR",					// 한글 설
-			});
+	$(document).ready(function() {
+		//여기 아래 부분
+		$('#message').summernote({
+			  height: 300,                 // 에디터 높이
+			  minHeight: null,             // 최소 높이
+			  maxHeight: null,             // 최대 높이
+			  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+			  lang: "ko-KR",					// 한글 설정
 		});
+		$('#message').summernote('code','${dto.productContents}');
+	});
 	</script>
     </body>
 </html>

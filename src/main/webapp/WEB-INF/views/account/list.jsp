@@ -13,60 +13,41 @@
 <!-- 사용전 경로를 꼭 수정하세요  -->
 <!-- head_css  -->
 <c:import url="../temps/head_css.jsp"></c:import>
-<style type="text/css">
-a {
-	text-decoration: none;
-	color: black
-}
-</style>
 </head>
 <body class="d-flex flex-column h-100">
 	<main class="flex-shrink-0">
 		<!-- 사용전 경로를 꼭 수정하세요  -->
 		<!-- Navigation-->
 		<c:import url="../temps/header.jsp"></c:import>
-		<div class="container px-5 mt-5">
-			<div class="row g-4 align-items-end">
-				<form class="col row g-3 mb-3">
-					<div class="col-auto">
-						<select class="form-select" name="kind">
-							<option value="kind1">이름</option>
-							<option value="kind2">내용</option>
-							<option value="kind3">이름&내용</option>
-						</select>
-					</div>
-					<div class="col-auto">
-						<label for="search" class="visually-hidden">Search</label> <input
-							type="text" name="search" class="form-control" id="search"
-							value="${pager.search}">
-					</div>
-					<div class="col-auto">
-						<button type="submit" class="btn btn-light">Search</button>
-					</div>
-				</form>
-				<div class="col-auto d-flex justify-content-end">
-					<a class="btn btn-light mb-3" href="./add">상품 등록</a>
-				</div>
-			</div>
-		</div>
 		<div class="container">
+			<div class="text-center my-5">
+				<h1 class="display-5 fw-bolder mb-0">
+					<span class="text-gradient d-inline"> 
+						내 계좌 목록
+					</span>
+				</h1>
+			</div>
 			<table class="table table-hover">
 				<thead>
 					<tr class="table-dark">
-						<th>No</th>
-						<th>Product Name</th>
-						<th>Rate</th>
-						<th>Product Rating</th>
+						<th>상품명</th>
+						<th>계좌번호</th>
+						<th>계좌잔액</th>
+						<th>이자율</th>
+						<th>가입일</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${list}" var="dto">
-						<tr>
-							<td>${dto.productNum}</td>
-							<td><a href="./detail?productNum=${dto.productNum}">${dto.productName}</a></td>
-							<td>${dto.productRate}</td>
-							<td>${dto.productJumsu}</td>
-						</tr>
+						<c:forEach items="${dto.accountDTOs}" var="acc">
+							<tr>
+								<td>${dto.productName}</td>
+								<td>${acc.accountNum}</td>
+								<td>${acc.accountBalance}</td>
+								<td>${dto.productRate}</td>
+								<td>${acc.accountDate}</td>
+							</tr>
+						</c:forEach>
 					</c:forEach>
 					<%-- <c:if test="${list.size() != 10}">
 							<c:forEach begin="1" end="${11-list.size()}">

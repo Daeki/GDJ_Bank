@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- mapper namespace는 비우면 에러 -->
+  <mapper namespace="com.winter.app.wishlist.WishListDAO">
+  	<select id="getList" resultType="ProductDTO" parameterType="MemberDTO" >
+  		SELECT PRODUCTNUM, PRODUCTNAME, PRODUCTRATE FROM PRODUCT
+		WHERE PRODUCTNUM IN 
+			(
+				(
+					SELECT PRODUCTNUM 
+					FROM WISHLIST
+					WHERE USERNAME=#{userName}
+				)
+			)
+  	</select>
+  
+ 	<insert id="setAdd" parameterType="AccountDTO">
+ 		INSERT INTO WISHLIST(PRODUCTNUM, USERNAME) VALUES(#{productNum},#{userName})
+ 	</insert>
+  </mapper>

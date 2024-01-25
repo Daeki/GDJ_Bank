@@ -11,6 +11,9 @@
 		<typeAlias type="com.winter.app.board.qna.QnaDTO" alias="QnaDTO"/>
 		<typeAlias type="com.winter.app.member.MemberDTO" alias="MemberDTO"/>
 		<typeAlias type="com.winter.app.member.AvatarDTO" alias="AvatarDTO"/>
+		<typeAlias type="com.winter.app.product.ProductDTO" alias="ProductDTO"/>
+		<typeAlias type="com.winter.app.product.ProductFileDTO" alias="ProductFileDTO"/>
+		<typeAlias type="com.winter.app.account.AccountDTO" alias="AccountDTO"/>
 		
 		
 		<typeAlias type="com.winter.app.util.Pager" alias="Pager"/>
