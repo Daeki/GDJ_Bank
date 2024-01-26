@@ -9,9 +9,17 @@
   		VALUES (PRODUCT_SEQ.NEXTVAL, #{productNum}, #{userName}, #{replyContents}, sysdate, #{replyJumsu})
   	</insert>
   	
-  	<select id="getList" parameterType="ReplyDTO" resultType="ReplyDTO">
-  		SELECT * FROM REPLY
+  	<select id="getTotalCount" parameterType="ReplyDTO" resultType="Long">
+  		SELECT COUNT(REPLYNUM) FROM REPLY
   		WHERE PRODUCTNUM=#{productNum}
-  		ORDER BY REPLYNUM DESC
+  	</select>
+  	
+  	<select id="getList" parameterType="Map" resultType="ReplyDTO">
+  		SELECT * FROM
+  		(SELECT ROWNUM RN, R.* FROM
+  		(SELECT * FROM REPLY
+  		WHERE PRODUCTNUM=#{replyDTO.productNum}
+  		ORDER BY REPLYNUM DESC) R)
+  		WHERE RN BETWEEN #{pager.startRow} AND #{pager.lastRow}
   	</select>
   </mapper>

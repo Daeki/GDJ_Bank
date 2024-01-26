@@ -5,6 +5,21 @@
  const up = document.getElementById("up");
  const dele = document.getElementById("del");
  const create = document.getElementById("create");
+ const more = document.getElementById("more")
+ const replyList = document.getElementById("replyList");
+
+ replyList.addEventListener("click", (e)=>{
+	
+	if(e.target.getAttribute("id")=='more'){
+		let p = e.target.getAttribute('data-replyList-page');
+		fetch("../reply/list?productNum="+up.getAttribute("data-product-num")+"&page="+(p*1+1), {
+			method:"GET"
+		}).then(r=> r.text())
+		  .then(r=>document.getElementById("replyList").innerHTML=r)
+
+	}
+	
+ })
 
 //replyAdd (Fetch 사용, JS)
 const replyAdd = document.getElementById("replyAdd");
