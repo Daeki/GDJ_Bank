@@ -66,6 +66,10 @@
 					</c:if>
 				</div>
 
+				<div class="my-3" id="replyList">
+
+				</div>
+
 				<div class="my-3">
 					<form id="replyForm">
 						  <input type="hidden" name="productNum" value="${detail.productNum}">	

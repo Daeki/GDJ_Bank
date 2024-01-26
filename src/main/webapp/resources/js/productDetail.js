@@ -8,6 +8,12 @@
 
 //replyAdd (Fetch 사용, JS)
 const replyAdd = document.getElementById("replyAdd");
+
+fetch("../reply/list?productNum="+up.getAttribute("data-product-num"), {
+	method:"GET"
+}).then(r=> r.text())
+  .then(r=>document.getElementById("replyList").innerHTML=r)
+
 	
 replyAdd.addEventListener("click", ()=>{
 	const replyForm = document.getElementById("replyForm");
@@ -18,7 +24,10 @@ replyAdd.addEventListener("click", ()=>{
 		body:form
 	})
 	.then(r=>r.text())
-	.then(r=>console.log(r))
+	.then(r=>{
+		document.getElementById("replyList").innerHTML=r
+		replyForm.reset();
+	})
 })
 
 
