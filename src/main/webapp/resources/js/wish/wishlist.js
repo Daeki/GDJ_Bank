@@ -15,8 +15,8 @@ $("#del").click(function(){
         }
     });
 
-    deleteWithJquery(nums);
-    //deleteWithFetch(nums);
+    //deleteWithJquery(nums);
+    deleteWithFetch(nums);
     console.log(nums);
 
 });
@@ -28,16 +28,16 @@ function deleteWithFetch(nums){
     // });
 
     let deleteForm = document.getElementById("deleteForm");
-
+    console.log(deleteForm)
     let form = new FormData(deleteForm);
 
     fetch("./delete",{
         method:"POST",
-        // headers:{
-        //     "Content-type":"application/x-www-form-urlencoded"
-        // },
-        //body:"productNum="+nums
-        body:form
+         headers:{
+             "Content-type":"application/x-www-form-urlencoded"
+         },
+        body:"productNum="+nums
+        //body:form
     } )
     .then(response=> response.text())
     .then(response=>{
@@ -85,7 +85,7 @@ $('#checkAll').click(()=>{
     $('.checks').prop("checked", v);
 });
 
-$('.checks').click(function(){
+$('#ajaxList').on("click", ".checks", function(){
     let flag=true;
     
     $('.checks').each(function(idx, c){

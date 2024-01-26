@@ -21,6 +21,8 @@ public class ReplyController {
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		replyDTO.setUserName(memberDTO.getUserName());
 		int result = replyService.setReply(replyDTO);
+		
+		//list
 	}
 	
 }

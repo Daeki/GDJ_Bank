@@ -74,8 +74,8 @@ a {
 						<th>Rate</th>
 					</tr>
 				</thead>
+				<form id="deleteForm">
 				<tbody id="ajaxList">
-					<form id="deleteForm">
 					<c:forEach items="${list}" var="dto">
 						<tr>
 							<td>
@@ -89,7 +89,7 @@ a {
 							
 						</tr>
 					</c:forEach>
-					</form>
+					
 					<%-- <c:if test="${list.size() != 10}">
 							<c:forEach begin="1" end="${11-list.size()}">
 								<tr>
@@ -101,6 +101,7 @@ a {
 							</c:forEach>
 						</c:if> --%>
 				</tbody>
+			</form>
 			</table>
 
 			<nav aria-label="Page navigation example"

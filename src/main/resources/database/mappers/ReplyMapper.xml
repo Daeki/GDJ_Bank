@@ -8,4 +8,10 @@
   		INSERT INTO REPLY 
   		VALUES (PRODUCT_SEQ.NEXTVAL, #{productNum}, #{userName}, #{replyContents}, sysdate, #{replyJumsu})
   	</insert>
+  	
+  	<select id="getList" parameterType="ReplyDTO" resultType="ReplyDTO">
+  		SELECT * FROM REPLY
+  		WHERE PRODUCTNUM=#{productNum}
+  		ORDER BY REPLYNUM DESC
+  	</select>
   </mapper>

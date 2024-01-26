@@ -6,7 +6,7 @@
 	<tr>
 		<td>
 			<div class="form-check">
-				<input class="form-check-input checks" type="checkbox"
+				<input class="form-check-input checks" type="checkbox" name="productNum"
 					value="${dto.productNum}">
 			</div>
 		</td>
@@ -16,3 +16,4 @@
 
 	</tr>
 </c:forEach>
+

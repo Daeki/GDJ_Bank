@@ -67,7 +67,8 @@
 				</div>
 
 				<div class="my-3">
-					<form>
+					<form id="replyForm">
+						  <input type="hidden" name="productNum" value="${detail.productNum}">	
 						  <div class="mb-3">
 							<textarea class="form-control" name="replyContents" id="replyContents" rows="3"></textarea>
 						  </div>
@@ -82,7 +83,7 @@
 						  </div>
 
 						  <div>
-							<button type="button" class="btn btn-primary">댓글달기</button>
+							<button type="button" class="btn btn-primary" id="replyAdd">댓글달기</button>
 						  </div>
 					</form>
 
