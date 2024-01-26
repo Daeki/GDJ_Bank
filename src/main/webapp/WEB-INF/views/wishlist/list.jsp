@@ -73,7 +73,7 @@ a {
 						<th>Rate</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="ajaxList">
 					<c:forEach items="${list}" var="dto">
 						<tr>
 							<td>

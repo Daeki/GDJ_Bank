@@ -26,11 +26,14 @@ public class WishListController {
 	public String setDelete(Long [] productNum, HttpSession session, Model model)throws Exception{
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		int result = wsListService.setDelete(productNum, memberDTO);
+		
+		//다시 조회
 		List<ProductDTO> ar = wsListService.getList(memberDTO);
 		
-		model.addAttribute("result", result);
+		//model.addAttribute("result", result);
+		model.addAttribute("list", ar);
 		
-		return "commons/ajaxResult";
+		return "wishlist/ajaxList";
 	}
 	
 	@GetMapping("list")
