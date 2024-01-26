@@ -55,6 +55,7 @@ a {
 		<div class="container">
 			<div>
 				<button id="del">삭제</button>
+				<button id="add">가입</button>
 			</div>
 
 			<table class="table table-hover">
@@ -74,11 +75,12 @@ a {
 					</tr>
 				</thead>
 				<tbody id="ajaxList">
+					<form id="deleteForm">
 					<c:forEach items="${list}" var="dto">
 						<tr>
 							<td>
 								<div class="form-check">
-									<input class="form-check-input checks" type="checkbox" value="${dto.productNum}" >
+									<input class="form-check-input checks" type="checkbox" name="productNum" value="${dto.productNum}" >
 								</div>
 							</td>
 							<td>${dto.productNum}</td>
@@ -87,6 +89,7 @@ a {
 							
 						</tr>
 					</c:forEach>
+					</form>
 					<%-- <c:if test="${list.size() != 10}">
 							<c:forEach begin="1" end="${11-list.size()}">
 								<tr>

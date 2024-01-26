@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- mapper namespace는 비우면 에러 -->
+  <mapper namespace="com.winter.app.product.ReplyDAO">
+  	<insert id="setReply" parameterType="ReplyDTO">
+  		INSERT INTO REPLY 
+  		VALUES (PRODUCT_SEQ.NEXTVAL, #{productNum}, #{userName}, #{replyContents}, sysdate, #{replyJumsu})
+  	</insert>
+  </mapper>

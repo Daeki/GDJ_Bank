@@ -1,4 +1,9 @@
 
+$("#add").click(function(){
+    $("#deleteForm").attr("action", "../account/add")
+    $("#deleteForm").submit();
+});
+
 $("#del").click(function(){
 
     let nums = [];
@@ -10,24 +15,29 @@ $("#del").click(function(){
         }
     });
 
-    //deleteWithJquery(nums);
-    deleteWithFetch(nums);
+    deleteWithJquery(nums);
+    //deleteWithFetch(nums);
     console.log(nums);
 
 });
 
 function deleteWithFetch(nums){
-    let param ="";
-    nums.forEach(element => {
-        param=param+"productNum="+element+"&";
-    });
+    // let param ="";
+    // nums.forEach(element => {
+    //     param=param+"productNum="+element+"&";
+    // });
+
+    let deleteForm = document.getElementById("deleteForm");
+
+    let form = new FormData(deleteForm);
 
     fetch("./delete",{
         method:"POST",
-        headers:{
-            "Content-type":"application/x-www-form-urlencoded"
-        },
-        body:param
+        // headers:{
+        //     "Content-type":"application/x-www-form-urlencoded"
+        // },
+        //body:"productNum="+nums
+        body:form
     } )
     .then(response=> response.text())
     .then(response=>{
@@ -37,13 +47,17 @@ function deleteWithFetch(nums){
 }
 
 function deleteWithJquery(nums){
+
+    let form = new FormData($("#deleteForm")[0]);
+
     $.ajax({
         method:"post",
         url:"./delete",
-        traditional:true,
-        data:{
-            productNum:nums, 
-        },
+
+        cache:false,
+        contentType:false,
+        processData:false,
+        data:form,
         success:function(result){
             //if(result.trim()>0){
                 //1. location.reload();

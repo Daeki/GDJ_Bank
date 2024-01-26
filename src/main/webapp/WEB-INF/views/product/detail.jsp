@@ -66,6 +66,28 @@
 					</c:if>
 				</div>
 
+				<div class="my-3">
+					<form>
+						  <div class="mb-3">
+							<textarea class="form-control" name="replyContents" id="replyContents" rows="3"></textarea>
+						  </div>
+						  <div class="mb-3">
+						  <select class="form-select" name="replyJumsu" aria-label="Default select example">
+							<option value="5">5</option>
+							<option value="4">4</option>
+							<option value="3">3</option>
+							<option value="2">2</option>
+							<option value="1">1</option>
+						  </select>
+						  </div>
+
+						  <div>
+							<button type="button" class="btn btn-primary">댓글달기</button>
+						  </div>
+					</form>
+
+				</div>
+
 			</div>
 
 		</div>
