@@ -77,7 +77,7 @@
 								<th></th>
 							</tr>
 						</thead>
-						<tbody id="replyList">
+						<tbody id="replyList" data-user="${member.userName}">
 							
 						</tbody>
 					</table>

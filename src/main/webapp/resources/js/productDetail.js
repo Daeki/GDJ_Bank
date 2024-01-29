@@ -7,22 +7,32 @@
  const create = document.getElementById("create");
  const more = document.getElementById("more")
  const replyList = document.getElementById("replyList");
+ const replyAdd = document.getElementById("replyAdd");
 
-//  replyList.addEventListener("click", (e)=>{
-	
-// 	if(e.target.getAttribute("id")=='more'){
-// 		let p = e.target.getAttribute('data-replyList-page');
-// 		fetch("../reply/list?productNum="+up.getAttribute("data-product-num")+"&page="+(p*1+1), {
-// 			method:"GET"
-// 		}).then(r=> r.text())
-// 		  .then(r=>document.getElementById("replyList").innerHTML=r)
 
-// 	}
-	
-//  })
 
 getReplyList(1, up.getAttribute("data-product-num"));
 
+//삭제 버튼
+$("#replyList").on("click", ".del", function(){
+	let n = $(this).attr("data-replyNum")
+	console.log("replyNum : ", n)
+
+	
+	fetch("../reply/delete",{
+		method:"post",
+		headers : {"Content-type": 'application/x-www-form-urlencoded;charset=utf-8'},
+		body:"replyNum="+n+"&productNum="+ up.getAttribute("data-product-num")
+	})
+	.then(r=>r.json())
+	.then(r=>{
+		replyList.innerHTML="";
+		makeList(r);
+	})
+})
+
+
+//더보기 
 more.addEventListener("click", ()=>{
 	let p = more.getAttribute("data-replyList-page");//현재 페이지 번호
 	let a = more.getAttribute("data-replyList-totalPage");//전체 페이지 번호
@@ -34,49 +44,66 @@ more.addEventListener("click", ()=>{
 	getReplyList(p, up.getAttribute("data-product-num"))
 })
 
+// list 가져 오는 함수
 function getReplyList(page, num){
 	fetch("../reply/list?page="+page+"&productNum="+num, {
 		method:"GET"
 	})
 	.then(r => r.json())
 	.then(r => {
-		more.setAttribute("data-replyList-page", r.pager.page*1+1);
-		more.setAttribute("data-replyList-totalPage", r.pager.totalPage);
-		r=r.datas;
-		for(let i=0;i<r.length;i++){
-			let tr = document.createElement("tr");
-
-			let td = document.createElement("td");
-			td.innerHTML=r[i].replyContents;
-			tr.append(td);
-
-			td = document.createElement("td");
-			td.innerHTML=r[i].userName;
-			tr.append(td);
-
-			td = document.createElement("td");
-			let d = new Date(r[i].replyDate);
-			td.innerHTML=d.getFullYear()+"."+(d.getMonth()+1)+"."+d.getDate();
-			tr.append(td);
-			replyList.append(tr);
-		}
-
-
+		makeList(r);
 	})
 	;
 
 }
 
+function makeList(r){
+	more.setAttribute("data-replyList-page", r.pager.page*1+1);
+	more.setAttribute("data-replyList-totalPage", r.pager.totalPage);
+	let userName = replyList.getAttribute("data-user");
+	r=r.datas;
+	for(let i=0;i<r.length;i++){
+		let tr = document.createElement("tr");
 
-//replyAdd (Fetch 사용, JS)
-const replyAdd = document.getElementById("replyAdd");
+		let td = document.createElement("td");
+		td.innerHTML=r[i].replyContents;
+		tr.append(td);
 
-// fetch("../reply/list?productNum="+up.getAttribute("data-product-num"), {
-// 	method:"GET"
-// }).then(r=> r.text())
-//   .then(r=>document.getElementById("replyList").innerHTML=r)
+		td = document.createElement("td");
+		td.innerHTML=r[i].userName;
+		tr.append(td);
 
-	
+		td = document.createElement("td");
+		let d = new Date(r[i].replyDate);
+		td.innerHTML=d.getFullYear()+"."+(d.getMonth()+1)+"."+d.getDate();
+		tr.append(td);
+
+		if(userName == r[i].userName){
+			td = document.createElement("td");
+			let b = document.createElement("button")
+			b.innerHTML="삭제";
+			b.setAttribute("class", "del")
+			b.setAttribute("data-replyNum", r[i].replyNum)
+			td.append(b);
+			tr.append(td)
+
+			td = document.createElement("td");
+			b = document.createElement("button")
+			b.innerHTML="수정";
+			b.setAttribute("class", "update")
+			b.setAttribute("data-replyNum", r[i].replyNum)
+			td.append(b);
+			tr.append(td)
+		}
+		replyList.append(tr);
+	}
+}
+
+
+
+
+
+//댓글등록
 replyAdd.addEventListener("click", ()=>{
 	const replyForm = document.getElementById("replyForm");
 	let form = new FormData(replyForm);
@@ -85,11 +112,12 @@ replyAdd.addEventListener("click", ()=>{
 		method:"POST",
 		body:form
 	})
-	.then(r=>r.text())
+	.then(r=>r.json())
 	.then(r=>{
-		document.getElementById("replyList").innerHTML=r
+		replyList.innerHTML="";
+		makeList(r);
 		replyForm.reset();
-		more.setAttribute("data-replyList-page", 1);
+		
 	})
 })
 

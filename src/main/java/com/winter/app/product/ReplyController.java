@@ -24,16 +24,34 @@ public class ReplyController {
 	@Autowired
 	private ReplyService replyService;
 	
+	@PostMapping("delete")
+	@ResponseBody
+	public Map<String, Object> setDelete(Pager pager, ReplyDTO replyDTO)throws Exception{
+		replyService.setDelete(replyDTO);
+	 	List<ReplyDTO> ar = replyService.getList(pager, replyDTO);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("datas", ar);
+		map.put("pager", pager);
+		
+		return map;
+	}
+	
 	@PostMapping("add")
-	public String setReply(Pager pager,ReplyDTO replyDTO, HttpSession session, Model model)throws Exception{
+	@ResponseBody
+	public Map<String, Object> setReply(Pager pager,ReplyDTO replyDTO, HttpSession session, Model model)throws Exception{
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		replyDTO.setUserName(memberDTO.getUserName());
 		
 		int result = replyService.setReply(replyDTO);
 		
 		List<ReplyDTO> ar = replyService.getList(pager, replyDTO);
-		model.addAttribute("list", ar);
-		return "product/replyListResult";
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("datas", ar);
+		map.put("pager", pager);
+		
+		
+		return map;
 		
 	}
 	
