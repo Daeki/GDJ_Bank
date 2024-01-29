@@ -24,6 +24,7 @@
   			<result column="FILENAME" property="fileName"/>
   			<result column="ORINAME" property="oriName"/>
   		</collection>
+  		
   	</resultMap>
   	
   	<insert id="addFile" parameterType="ProductFileDTO">
