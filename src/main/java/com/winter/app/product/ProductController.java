@@ -20,8 +20,6 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productServices;
-	@Autowired
-	private ReplyService replyService;
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public void getList(Pager pager, Model model) throws Exception {
@@ -38,14 +36,6 @@ public class ProductController {
 		mv.addObject("detail", pD);
 		mv.setViewName("product/detail");
 		
-		//처음 가지고 올때만 댓글 목록도 조회
-		ReplyDTO replyDTO = new ReplyDTO();
-		Pager pager = new Pager();
-		replyDTO.setProductNum(pD.getProductNum());
-		List<ReplyDTO> replyList = replyService.getList(pager, replyDTO);
-		
-		mv.addObject("pager", pager);
-		mv.addObject("replyList", replyList);
 		return mv;
 	}
 	
