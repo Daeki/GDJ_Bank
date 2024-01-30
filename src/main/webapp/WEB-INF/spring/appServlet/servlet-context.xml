@@ -35,6 +35,9 @@
 			<mapping path="/member/mypage"/>
 			<mapping path="/member/update"/>
 			<mapping path="/member/delete"/>
+			<mapping path="/notice/add"/>
+			<mapping path="/notice/update"/>
+			<mapping path="/notice/delete"/>
 			<exclude-mapping path="/qna/list"/>
 			<beans:ref bean="authenticationInterCeptor"/>
 		</interceptor>
@@ -45,6 +48,13 @@
 			<mapping path="/notice/update"/>
 			<mapping path="/notice/delete"/>
 			<beans:ref bean="writerCheckInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/notice/add"/>
+			<mapping path="/notice/update"/>
+			<mapping path="/notice/delete"/>
+			<beans:ref bean="adminCheckInterceptor"/>
 		</interceptor>
 		
 	</interceptors>

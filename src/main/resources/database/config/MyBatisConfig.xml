@@ -9,10 +9,14 @@
 		<typeAlias type="com.winter.app.board.BoardDTO" alias="BoardDTO"/>
 		<typeAlias type="com.winter.app.board.notice.NoticeDTO" alias="NoticeDTO"/>
 		<typeAlias type="com.winter.app.board.qna.QnaDTO" alias="QnaDTO"/>
+		
 		<typeAlias type="com.winter.app.member.MemberDTO" alias="MemberDTO"/>
 		<typeAlias type="com.winter.app.member.AvatarDTO" alias="AvatarDTO"/>
+		<typeAlias type="com.winter.app.member.role.RoleDTO" alias="RoleDTO"/>
+		
 		<typeAlias type="com.winter.app.product.ProductDTO" alias="ProductDTO"/>
 		<typeAlias type="com.winter.app.product.ProductFileDTO" alias="ProductFileDTO"/>
+		
 		<typeAlias type="com.winter.app.product.ReplyDTO" alias="ReplyDTO"/>
 		<typeAlias type="com.winter.app.account.AccountDTO" alias="AccountDTO"/>
 		
