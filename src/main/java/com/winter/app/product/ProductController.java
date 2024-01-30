@@ -20,6 +20,8 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productServices;
+	
+	
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public void getList(Pager pager, Model model) throws Exception {

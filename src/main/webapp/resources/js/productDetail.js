@@ -8,10 +8,59 @@
  const more = document.getElementById("more")
  const replyList = document.getElementById("replyList");
  const replyAdd = document.getElementById("replyAdd");
-
+ const replyUpdateButton = document.getElementById("replyUpdateButton");
 
 
 getReplyList(1, up.getAttribute("data-product-num"));
+
+//모달 수정 버튼
+replyUpdateButton.addEventListener("click", function(){
+	let replyUpdateForm = document.getElementById("replyUpdateForm");
+
+	let formData = new FormData(replyUpdateForm);
+
+	fetch("../reply/update", {
+		method:"post",
+		body:formData
+	})
+	.then(r => r.json())
+	.then(r => {
+
+		if(r>0){
+		//td의 id 가져와서 내용을 수정
+			let i= "replyContents"+document.getElementById("replyUpdateNum").value;
+			i= document.getElementById(i);
+			i.innerHTML=document.getElementById("replyUpdateContents").value
+
+		}else {
+			alert('수정 실패');
+		}
+		//modal 닫기
+		replyUpdateForm.reset();
+		document.getElementById("replyCloseButton").click();
+	})
+
+
+})
+
+//수정 버튼
+replyList.addEventListener("click", (e)=>{
+	if(e.target.classList.contains("update")){
+		//modal textarea
+		const replyUpdateContents = document.getElementById("replyUpdateContents");
+		
+		//td의 id 생성
+		let i= 'replyContents'+e.target.getAttribute("data-replyNum");
+
+		//해당 id의 td element
+		const r = document.getElementById(i);
+		replyUpdateContents.value=r.innerHTML;
+		document.getElementById("replyUpdateNum").value=e.target.getAttribute("data-replyNum");
+
+		//td의 다음 형제의 contents
+		document.getElementById("replyWriter").value = r.nextSibling.innerHTML
+	}
+})
 
 //삭제 버튼
 $("#replyList").on("click", ".del", function(){
@@ -66,6 +115,7 @@ function makeList(r){
 		let tr = document.createElement("tr");
 
 		let td = document.createElement("td");
+		td.setAttribute("id", "replyContents"+r[i].replyNum)
 		td.innerHTML=r[i].replyContents;
 		tr.append(td);
 
@@ -92,6 +142,8 @@ function makeList(r){
 			b.innerHTML="수정";
 			b.setAttribute("class", "update")
 			b.setAttribute("data-replyNum", r[i].replyNum)
+			b.setAttribute("data-bs-toggle", "modal");
+			b.setAttribute("data-bs-target", "#replyUpdateModal");
 			td.append(b);
 			tr.append(td)
 		}

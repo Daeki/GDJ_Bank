@@ -115,8 +115,34 @@
 
 		</div>
 	</main>
+	<!-- Modal -->
+	<div class="modal fade" id="replyUpdateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form method="post" id="replyUpdateForm">
+					<textarea class="form-control" name="replyContents" id="replyUpdateContents" rows="3"></textarea>
+					<input type="hidden" value="" name="replyNum" id="replyUpdateNum">
+					<input type="hidden" value="" name="userName" id="replyWriter">	
+				</form>
+				</div>
+				<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" id="replyCloseButton" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" id="replyUpdateButton">수정</button>
+			</div>
+		</div>
+		</div>
+	</div>
+	
+	
+	
 	<!-- 사용전 경로를 꼭 수정하세요  -->
 	<!-- Footer  -->
+
 	<c:import url="../temps/footer.jsp"></c:import>
 	<script src="../resources/js/productDetail.js"></script>
 </body>

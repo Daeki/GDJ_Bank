@@ -14,6 +14,11 @@ public class ReplyService {
 	@Autowired
 	private ReplyDAO replyDAO;
 	
+	
+	public int setUpdate(ReplyDTO replyDTO)throws Exception{
+		return replyDAO.setUpdate(replyDTO);
+	}
+	
 	public int setDelete(ReplyDTO replyDTO)throws Exception{
 		return replyDAO.setDelete(replyDTO);
 	}
